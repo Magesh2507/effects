@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        body{
+        overflow: hidden;
+        display: flex;
+        gap: 80px;
+        }
+        .card {
+    position: relative;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    font-size: 13px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    z-index: 1;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis for long text */
+}
+
+.tooltip.show {
+    display: block;
+}
+
+
+h4.show-text {
+    display: block;
+}
+
+        
+    </style>
+    <div class="card" id="185033000000023069" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+        <img id="185033000000023069" src="">
+        <h4 class="ellipsis">Room tertertfressdfff sd fsd fsfs heners</h4>
+    </div>
+    <div class="card" id="185033000000023069" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+        <img id="185033000000023069" src="">
+        <h4 class="ellipsis">Room tertertfrfsffs  fsdfs sfsdfs esheners</h4>
+    </div><div class="card" id="185033000000023069" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+        <img id="185033000000023069" src="">
+        <h4 class="ellipsis">Room tertertfdsfsf sfsfs sdfsf sdfs resheners</h4>
+    </div><div class="card" id="185033000000023069" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+        <img id="185033000000023069" src="">
+        <h4 class="ellipsis">Room tertertffsdfs sfsf sfsfs sfsdf resheners</h4>
+    </div><div class="card" id="185033000000023069" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+        <img id="185033000000023069" src="">
+        <h4 class="ellipsis">Room tertertsfsdf dfsfs fsdf fresheners</h4>
+    </div><div class="card" id="185033000000023069" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+        <img id="185033000000023069" src="">
+        <h4 class="ellipsis">Room terterdsfsf fsf sfsf tfresheners</h4>
+    </div><div class="card" id="185033000000023069" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+        <img id="185033000000023069" src="">
+        <h4 class="ellipsis">Room tertertfrdfsf sf sfsfsf fsfs esheners</h4>
+    </div>
+    
+    
+    <script>
+function showTooltip(element) {
+    var h4Element = element.querySelector('h4');
+
+    // Create a hidden tooltip off-screen to measure its dimensions
+    var hiddenTooltip = document.createElement('div');
+    hiddenTooltip.style.position = 'absolute';
+    hiddenTooltip.style.left = '-9999px';
+    hiddenTooltip.style.visibility = 'hidden';
+    hiddenTooltip.textContent = h4Element.textContent;
+    document.body.appendChild(hiddenTooltip);
+
+    // Calculate the dimensions of the hidden tooltip
+    var tooltipWidth = hiddenTooltip.offsetWidth;
+    var tooltipHeight = hiddenTooltip.offsetHeight;
+
+    // Remove the hidden tooltip
+    hiddenTooltip.remove();
+
+    // Create a visible tooltip element with the correct dimensions
+    var tooltip = document.createElement('div');
+    tooltip.classList.add('tooltip');
+    tooltip.textContent = h4Element.textContent;
+
+    // Append the tooltip to the body
+    document.body.appendChild(tooltip);
+
+    // Position the tooltip below the h4 element
+    var rect = h4Element.getBoundingClientRect();
+    var leftPosition = rect.left;
+    var topPosition = rect.bottom + 5; // Show below the h4 element
+
+    // Check if the tooltip would go outside the right edge of the screen
+    if (leftPosition + tooltipWidth > window.innerWidth) {
+        leftPosition = window.innerWidth - tooltipWidth;
+    }
+
+    tooltip.style.left = leftPosition + 'px';
+    tooltip.style.top = topPosition + 'px';
+
+    // Add a class to show the tooltip
+    tooltip.classList.add('show');
+}
+
+function hideTooltip(element) {
+    var tooltip = document.querySelector('.tooltip');
+    if (tooltip) {
+        tooltip.remove();
+    }
+}
+
+
+    </script>
+</body>
+
+</html>

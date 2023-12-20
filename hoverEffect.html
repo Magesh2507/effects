@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Navigation Bar</title>
+</head>
+<body>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    position: relative;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+    margin-right: 20px;    
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    position: relative;
+}
+
+.nav-overlay {
+    width: 1000%;
+    height: 500px; /* Initial height for the div */
+    background-color: #555;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(200%); /* Move the div below the link */
+    transition: transform 0.3s ease-in-out;
+    visibility: hidden; /* Initially hidden */
+}
+
+a:hover .nav-overlay {
+    transform: translateY(100%); /* Move up to reveal */
+    visibility: visible; /* Show on hover */
+}
+
+</style>
+    <nav>
+        <ul>
+            <li><a href="#">Home<span class="nav-overlay">
+            <span>one</span>  <span>one</span>  <span>one</span>  <span>one</span>  <span>one</span>
+            </span>
+            </a>
+            </li>            
+            <li><a href="#">About<span class="nav-overlay"></span></a></li>
+            <li><a href="#">Services<span class="nav-overlay"></span></a></li>
+            <li><a href="#">Contact<span class="nav-overlay"></span></a></li>
+        </ul>
+    </nav>
+</body>
+</html>

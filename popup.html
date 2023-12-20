@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Success</title>
+    <style>
+        /* CSS for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        /* CSS for the overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* CSS for the success icon */
+        .icon {
+            font-size: 48px;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <!-- Popup overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Success popup -->
+    <div class="popup" id="popup">
+        <div class="icon">&#10003;</div>
+        <h2>Registration Successful!</h2>
+        <p>Thank you for registering.</p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        // Function to show the popup
+        function showPopup() {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("popup").style.display = "none";
+        }
+
+        // Simulate registration success (you can replace this with your actual registration logic)
+        function simulateRegistrationSuccess() {
+            showPopup();
+        }
+
+        // Call the registration success function (you can trigger this based on your registration logic)
+        simulateRegistrationSuccess();
+    </script>
+</body>
+</html>
