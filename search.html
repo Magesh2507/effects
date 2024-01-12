@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Search</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+/* Basic styling for the search input */
+#searchInput {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Styling for the suggestion container */
+#suggestionsContainer {
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Styling for individual suggestion items */
+#suggestionsContainer div {
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#suggestionsContainer div:hover {
+  background-color: #f5f5f5;
+}
+
+
+/* Hold recall css */
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.hold-main{
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  background-color: aliceblue;
+}
+
+.hold-main, .content{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.content{
+  width: 60%; 
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  min-height: 80%;
+}
+
+.content, .searchBar, .holdCustomerDiv{
+  margin: 10px 0px;
+}
+
+.content .search-hold-customer,.searchBar, .holdCustomerDiv, .holdCustomerTable{
+  width: 100%;
+}
+
+.holdCustomerTable{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+}
+
+.holdCustomerTable td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+.holdCustomerTable tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.search-hold-customer{
+  outline: none;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+}
+
+
+</style>
+  <!-- <input type="text" id="searchInput" placeholder="Search for products">
+  <div id="suggestionsContainer"></div> -->
+  <div class="hold-main">
+    <div class="content">
+      <div  style = "display: flex; flex-direction: row-reverse; text-align: center; width: 100%;" >    
+        <a href="#" class="btn btn-info btn-md" onclick="closeHoldCustomer()">
+          <span class="glyphicon glyphicon-remove-sign"></span> Close
+        </a>
+      </div>   
+      <div class="searchBar">
+        <input placeholder="Search for Names" type="search" id="search-hold-customer" class="search-hold-customer" onkeyup="myFunction()"/>
+      </div>
+      <div class="holdCustomerDiv">
+        <table id="holdCustomerTable" class="holdCustomerTable">
+          <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td><button type="button" class="btn btn-success" style="font-weight: 550;">Recall</button></td>
+          </tr>
+          <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td><button type="button" class="btn btn-success" style="font-weight: 550;">Recall</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+
+function closeHoldCustomer(){
+  const holdPopUp = document.querySelector(".hold-main")
+  holdPopUp.style.display = "none"
+}
+
+function myFunction() { 
+  var input, filter, table, tr, td, i, txtValue;
+  searchHoldCustomer = document.getElementById("search-hold-customer");
+  filter = searchHoldCustomer.value.toUpperCase();
+  holdCustomerTable = document.getElementById("holdCustomerTable");
+  tr = holdCustomerTable.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) { 
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+
+
+    const allProducts = ["Laptop", "Smart phone", "Headphones", "Keyboard", "Mouse", "Monitor", "Backpack", "Camera", "Printer", "Tablet",
+"Speakers", "Charger", "PowerBank", "Smartwatch", "FitnessTracker", "BluetoothEarbuds", "GamingConsole",
+"ExternalHardDrive", "SSD", "Router", "WiFiExtender", "Projector", "WirelessMouse", "GamingMouse",
+"BluetoothSpeaker", "Earphones", "DeskLamp", "CoffeeMaker", "Blender", "Toaster", "Microwave", "Refrigerator",
+"AirPurifier", "VacuumCleaner", "ElectricToothbrush", "HairDryer", "CurlingIron", "ElectricShaver",
+"Bicycle", "Scooter", "Skateboard", "Drone", "Telescope", "Tent", "SleepingBag", "HikingBoots", "CampingChair",
+"RunningShoes", "YogaMat", "Dumbbells", "JumpRope", "FitnessBall", "ResistancBands", "TennisRacket",
+"GolfClubs", "Basketball", "SoccerBall", "BaseballGlove", "Volleyball", "PingPongPaddle", "Fishingod",
+"Sunglasses", "Watch", "Wallet", "Backpack", "Handbag", "Briefcase", "Umbrella", "Hat", "Gloves", "Scarf", "Tie",
+"Earrings", "Necklace", "Bracelet", "Ring", "MakeupKit", "Perfume", "Shampoo", "Conditioner", "BodyWash",
+"Sunscreen", "Lipstick", "NailPolish", "Hairbrush", "Hair", "HairCurler", "FaceMask", "Bathrobe",
+"TowelSet", "BedSheets", "Pillow", "Duvet", "Blender", "Juicer", "RiceCooker", "SlowCooker", "EspressoMachine",
+"ElectricKettle", "FoodProcessor", "AirFryer", "WaffleMaker", "Sandwichaker", "ToasterOven", "Microwave",
+"SmartTV", "Soundbar", "StreamingDevice", "GamingChair", "GamingHeadset", "GamingKeyboard", "GamingMousepad",
+"GamingController", "VRHeadset", "BluetoothKeyboard", "ExternalSS"];
+
+
+
+
+//const searchInput = document.getElementById('searchInput');
+const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+// searchInput.addEventListener('input', (event) => {
+//   const query = event.target.value;
+//   if (query.trim() === '') {
+//     clearSuggestions();
+//   } else {
+//     const suggestions = filterSuggestions(query);
+//     if (suggestions.length === 0) {
+//       clearSuggestions();
+//     } else {
+//       displaySuggestions(suggestions);
+//     }
+//   }
+// });
+
+function filterSuggestions(query) {
+  query = query.toLowerCase();
+  return allProducts.filter(product => product.toLowerCase().includes(query));
+}
+
+function displaySuggestions(suggestions) {
+  suggestionsContainer.innerHTML = '';
+  suggestions.forEach(suggestion => {
+    const suggestionElement = document.createElement('div');
+    suggestionElement.textContent = suggestion;
+    suggestionElement.addEventListener('click', () => {
+      searchInput.value = suggestion;
+      clearSuggestions();
+    });
+    suggestionsContainer.appendChild(suggestionElement);
+  });
+}
+
+function clearSuggestions() {
+  suggestionsContainer.innerHTML = '';
+}
+
+// document.addEventListener("click", function (e) {
+//   clearSuggestions();
+//   // searchInput.value = "";
+//    })
+
+
+
+
+    // const searchInput = document.getElementById('searchInput');
+    // const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+    // searchInput.addEventListener('keyup', (event) => {
+    //   const query = event.target.value;
+    //   const suggestions = filterSuggestions(query);
+    //   displaySuggestions(suggestions);
+    // });
+
+    // function filterSuggestions(query) {
+    //   query = query.toLowerCase();
+    //   return allProducts.filter(product => product.toLowerCase().includes(query));
+    // }
+
+    // function displaySuggestions(suggestions) {
+    //   suggestionsContainer.innerHTML = '';
+    //   suggestions.forEach(suggestion => {
+    //     const suggestionElement = document.createElement('div');
+    //     suggestionElement.textContent = suggestion;
+    //     suggestionElement.addEventListener('click', () => {
+    //       searchInput.value = suggestion;
+    //       clearSuggestions();
+    //     });
+    //     suggestionsContainer.appendChild(suggestionElement);
+    //   });
+    // }
+
+    // function clearSuggestions() {
+    //   suggestionsContainer.innerHTML = '';
+    // }
+  </script>
+</body>
+</html>
